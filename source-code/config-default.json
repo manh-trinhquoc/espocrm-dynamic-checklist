@@ -15,7 +15,7 @@
         "language": "en_US",
         "defaultOwner": "www-data",
         "defaultGroup": "www-data",
-        "siteUrl": "http://localhost/ext-dynamic-checklist/site",
+        "siteUrl": "http://localhost/espocrm-dynamic-checklist/source-code/site",
         "adminUsername": "admin",
         "adminPassword": "1"
     }
