@@ -1,0 +1,43 @@
+{
+  "id" : 1,
+  "name" : "eSignature field",
+  "description" : "Description",
+  "lastModifiedDate" : "2023-10-18T04:07:54Z",
+  "properties" : {
+    "structurizr.dsl" : "d29ya3NwYWNlICJlU2lnbmF0dXJlIGZpZWxkIiB7CiAgICAhYWRycyBkZWNpc2lvbnMKICAgICFkb2NzIGRvY3VtZW50cwogICAgbW9kZWwgewogICAgICAgIAogICAgfQoKICAgIHZpZXdzIHsKICAgICAgICAKCiAgICAgICAgdGhlbWUgZGVmYXVsdAoKICAgICAgICAvLyB0aGVtZXMgaHR0cHM6Ly9zdGF0aWMuc3RydWN0dXJpenIuY29tL3RoZW1lcy9taWNyb3NvZnQtYXp1cmUtMjAyMS4wMS4yNi90aGVtZS5qc29uCiAgICB9Cgp9Cg=="
+  },
+  "configuration" : { },
+  "model" : { },
+  "documentation" : {
+    "sections" : [ {
+      "content" : "## Overview\n\n- Module to allow the use of electronic signature as a field and to generate documents that incorporate the electronic signature\n\n## Triển khai\nModule to allow the use of an electronic signature canvas as a field and to generate full page documents that incorporate the electronic signature and can be printed using the browser's PDF engine\n\nSteps to create an electronic signature document based on an EspoCRM entity:\n\n1) Create a new entity or edit an existing one (the 'target entity') through the Administration module and add a field type 'eSignature' (the 'target field'). \n\n2) Create a template to display the target entity.\n\n3) Include in the template a placeholder for the target field formatted as: '@@sig[target-field-name]/sig@@' where target-field-name is the name of the target field.\n\n4) If you are using EspoCRM's default clientDefs for the custom entity (you do not have a custom record view for the target entity), modify the json object \"recordViews\" section as follows:\n\n  BEFORE: \n  \"recordViews\": {\n    \"detail\": \"views/record/detail\"\n  }\n\n  AFTER:\n  \"recordViews\": {\n    \"detail\": \"esignature:views/record/detail\"\n  }\n\n5) If you use a custom view instead, (eg: 'custom:views/{target entity}/record/detail') make the following changes to that script:\n\n  BEFORE:\n  Espo.define('custom:views/{target entity}/record/detail', 'views/record/detail', function (Dep) {\n\n  AFTER:\n  Espo.define('custom:views/{target entity}/record/detail', ['views/record/detail','esignature:views/record/detail'], function (Dep,,Esignature) {\n\n  Make also the following changes to the rest of the script's code:\n\n        setupActionItems: function () {\n        \n          (all existing code goes here)\n          \n          Esignature.prototype.setupActionItems.call(this,true);            \n        },\n        \n        (all existing functions go here)\n        \n        actionDisplayEsignatureDocument: function () {  \n            Esignature.prototype.actionDisplayEsignatureDocument.call(this,true);\n        }\n\nInstructions to generate the electronic signature document:\n\n1) Open the target entity detail view and select 'Display eSignature Document' from the top left dropdown menu.\n\n2) Select the template created to display the document\n\n3) The complete document with the electronic signature panels will be rendered so that a user can enter an electronic signature by drawing inside the canvas provided. The signature will be saved when the \"Update\" link on the top right corner of the signature panel is clicked.\n\n4) After an electronic signature has been saved, it will no longer be possible to edit it and instead of an empty canvas, the electronic signature image will be displayed in the document.\n\n5) To print the document, click on the button with a printer icon on the top left corner of the document. In order to generate a PDF select your browser's PDF printer as the printing device.\n\n6) To close the document and return to the entity detail view, click on the button with the X at the top left corner of the document.\n\n## Tham khảo\n- clone from job: https://github.com/bandtank/esignature-field-and-documents-for-espocrm",
+      "format" : "Markdown",
+      "filename" : "001 overview.md",
+      "order" : 1,
+      "title" : ""
+    } ],
+    "decisions" : [ {
+      "content" : "# 0. File template\n\nDate: 2023-08-01\n\n## Status\n\nAccepted\n\n## Context\n\n- Bản template để note chung về frame work và để người dùng clone file\n\n## Decision\n- Khi trỏ đến node khác ta dùng cú pháp  title [text](link). Title sẽ bị đè bởi status chuẩn như Accepted, Proposed\n- [Xem các ví dụ khác](https://github.com/npryce/adr-tools/tree/master/tests)\n- We will use Architecture Decision Records, as described by Michael Nygard in [this article](http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions)\n\n## Consequences\n",
+      "format" : "Markdown",
+      "id" : "0",
+      "title" : "File template",
+      "date" : "2023-08-01T00:00:00Z",
+      "status" : "Accepted"
+    }, {
+      "content" : "# . version 0. 0. 1\n\nDate: 2023-10-18\n\n## Status\n\nAccepted\n\n## Release Note\n- Cloned as version v0.0.1\n",
+      "format" : "Markdown",
+      "id" : "1",
+      "title" : "version 0. 0. 1",
+      "date" : "2023-10-18T00:00:00Z",
+      "status" : "Accepted"
+    } ]
+  },
+  "views" : {
+    "configuration" : {
+      "branding" : { },
+      "styles" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ],
+      "terminology" : { }
+    }
+  }
+}

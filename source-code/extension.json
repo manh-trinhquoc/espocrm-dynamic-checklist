@@ -1,0 +1,13 @@
+{
+    "module": "DynamicChecklist",
+    "name": "Dynamic Checklist",
+    "description": "adds a custom type field which allows to dynamically create a checklist inside any EspoCRM entity.",
+    "author": "manhtq",
+    "bundled": false,
+    "acceptableVersions": [
+        ">=7.3.0"
+    ],
+    "php": [
+        ">=7.2"
+    ]
+}
